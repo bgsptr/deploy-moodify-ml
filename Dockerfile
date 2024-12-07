@@ -7,6 +7,7 @@ COPY . /app
 RUN pip install -r requirements.txt
 RUN pip install tensorflow
 
-EXPOSE 8080
+ENV PORT 8080
+EXPOSE ${PORT}
 
 CMD ["python", "app.py"]
