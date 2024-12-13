@@ -34,6 +34,13 @@ Error Response
 }
 ```
 
+Success Response
+```json
+{
+    "success": true,
+    "message": "success registered"
+}
+
 ## Dokumentasi Postman
 
 ![Articles](dokumentation%20postman/detail%20articles.png)
