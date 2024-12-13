@@ -1,24 +1,16 @@
-# backend-modify
+# API Documentation
 
-### Technologies Used
-* [NodeJS](https://nodejs.org/) This is a cross-platform runtime environment built on Chrome's V8 JavaScript engine used in running JavaScript codes on the server. It allows for installation and managing of dependencies and communication with databases.
-* [ExpressJS](https://www.expresjs.org/) This is a NodeJS web application framework.
+## Technologies Used
 
-### API Endpoints
-| HTTP Verbs | Endpoints | Action |
-| --- | --- | --- |
-| POST | /api/user/signup | To sign up a new user account |
-| POST | /api/user/login | To login an existing user account |
-| POST | /api/causes | To create a new cause |
-| GET | /api/causes | To retrieve all causes on the platform |
-| GET | /api/causes/:causeId | To retrieve details of a single cause |
-| PATCH | /api/causes/:causeId | To edit the details of a single cause |
-| DELETE | /api/causes/:causeId | To delete a single cause |
+- [NodeJS](https://nodejs.org/): A cross-platform runtime environment built on Chrome's V8 JavaScript engine used to run JavaScript code on the server. It facilitates dependency management and database communication.
+- [ExpressJS](https://expressjs.org/): A NodeJS web application framework.
 
-## Token Payload
+---
 
-1. POST /api/v1/auth/register
+## API Endpoints
 
+### 1. POST /api/v1/auth/register
+#### Request Body:
 ```json
 {
     "username": "agung",
@@ -26,15 +18,14 @@
     "password": "Ayam123!"
 }
 ```
-Error Response
+#### Error Response:
 ```json
 {
     "success": false,
     "message": "Username or email already registered"
 }
 ```
-
-Success Response
+#### Success Response:
 ```json
 {
     "success": true,
@@ -42,24 +33,22 @@ Success Response
 }
 ```
 
-2. POST /api/v1/auth/login
-
+### 2. POST /api/v1/auth/login
+#### Request Body:
 ```json
 {
     "email": "agung@gmail.com",
     "password": "Ayam1234!"
 }
-
 ```
-Error Response
+#### Error Response:
 ```json
 {
     "status": false,
     "error": "No User found"
 }
 ```
-
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
@@ -69,43 +58,43 @@ Success Response
     "expRefreshToken": "2024-12-20T02:33:44.467Z"
 }
 ```
-
-Bearer token is expired response example
+#### Token Expired Response:
 ```json
 {
     "message": "Invalid or expired token"
 }
 ```
 
-3. POST /api/v1/journals
-
-```json
+### 3. POST /api/v1/journals
+#### Request Header:
+```
 Authorization: <your_bearer_token>
+```
+#### Request Body:
+```json
 {
     "journalContent": "<your_content>"
 }
 ```
-
-Error 409 Response
+#### Error Responses:
+**409 Conflict:**
 ```json
 {
     "status": false,
     "message": "Journal already created today"
 }
 ```
-
-Error 422 Response
+**422 Unprocessable Entity:**
 ```json
 {
-    "status": true,
+    "status": false,
     "message": "validation error when create new journal",
     "errors": [
         "String must contain at least 200 character(s)"
     ]
 }
 ```
-
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
@@ -113,21 +102,19 @@ Success Response
 }
 ```
 
-
-4. GET /api/v1/profiles/me
-
-```json
+### 4. GET /api/v1/profiles/me
+#### Request Header:
+```
 Authorization: <your_bearer_token>
 ```
-
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
     "result": {
         "email": "komangweda@gmail.com",
         "username": "KomangWeda",
-        "name": "Mr. Wednesday ",
+        "name": "Mr. Wednesday",
         "gender": "male",
         "country": "Not Representing",
         "urlphoto": "https://storage.googleapis.com/bucket-profile-moodify/profileImage_komangweda@gmail.com_03122024_055647.jpeg"
@@ -135,18 +122,20 @@ Success Response
 }
 ```
 
-5. PUT /api/v1/profiles/me
-
-```json
+### 5. PUT /api/v1/profiles/me
+#### Request Header:
+```
 Authorization: <your_bearer_token>
+```
+#### Request Body:
+```json
 {
     "name": "bagus candra",
     "gender": "male",
     "country": "USA"
 }
 ```
-
-Error 400 Response
+#### Error Response:
 ```json
 {
     "status": false,
@@ -157,8 +146,7 @@ Error 400 Response
     }
 }
 ```
-
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
@@ -166,42 +154,40 @@ Success Response
 }
 ```
 
-6. PATCH /api/v1/profiles/photo
-
-```form-data
+### 6. PATCH /api/v1/profiles/photo
+#### Request Header:
+```
 Authorization: <your_bearer_token>
+```
+#### Request Body (form-data):
+```json
 {
-    "name": "bagus candra",
-    "gender": "male",
-    "country": "USA"
+    "photo": <image_file>
 }
 ```
-
-Error Response Image Size Above 2 MB
+#### Error Responses:
+**Image Size Above 2 MB:**
 ```json
 {
     "status": false,
     "message": "internal server error, Max size of image file must be below 2 MB"
 }
 ```
-
-Error Response With Input No Value or Text Value
+**No Value Provided:**
 ```json
 {
     "status": false,
     "message": "Please provide your photo profile"
 }
 ```
-
-Error Response With Wrong Format Image Input
+**Wrong Format:**
 ```json
 {
     "status": false,
     "message": "internal server error, Only PNG, JPEG, JPG, and WEBP are allowed"
 }
 ```
-
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
@@ -210,11 +196,12 @@ Success Response
 }
 ```
 
-7. GET /api/v1/articles/bookmarks/me
-
+### 7. GET /api/v1/articles/bookmarks/me
+#### Request Header:
+```
 Authorization: <your_bearer_token>
-
-Success Response
+```
+#### Success Response:
 ```json
 {
     "status": true,
@@ -223,32 +210,34 @@ Success Response
         {
             "id": "03e37921-8d94-4e6c-a584-b33ec4879453",
             "source": "Forbes",
-            "author": "Lance Eliot, Contributor, \n Lance Eliot, Contributor\n https://www.forbes.com/sites/lanceeliot/",
+            "author": "Lance Eliot",
             "title": "Generative AI Is Helping To Clear Up Brain Fog",
             "description": "People talk about having brain fog. The meaning differs. One creative way to aid diagnosing and resolving brain fog is via generative AI. Here's the inside scoop.",
             "url": "https://www.forbes.com/sites/lanceeliot/2024/11/24/generative-ai-is-helping-to-clear-up-brain-fog/",
-            "urlToImage": "https://imageio.forbes.com/specials-images/imageserve/6742bd86c3e3f33f6f0ec417/0x0.jpg?format=jpg&crop=2882,2160,x664,y0,safe&height=900&width=1600&fit=bounds",
+            "urlToImage": "https://imageio.forbes.com/specials-images/imageserve/6742bd86c3e3f33f6f0ec417/0x0.jpg",
             "publishedAt": "2024-11-24T05:52:47.000Z",
-            "content": "Generative AI and large language models (LLMs) are now one of the modern solutions that are thought to help overcome brain fog, a condition that often makes a person find it difficult to think clearly and lose focus. This technology is able to convey information, provide structured reminders, and even assist in creative processes such as brainstorming ideas when the brain is not optimal. Additionally, AI-based tools can automate routine tasks, so users can focus more on work that requires strategic thinking. However, using AI to overcome brain fog also has risks, such as excessive reliance on technology that can reduce natural cognitive resilience, as well as privacy issues related to circulating data. With a balanced approach, a combination of AI assistance and lifestyle changes such as maintaining sleep patterns, nutrition, and mindfulness practices, can be a holistic way to manage brain fog effectively."
+            "content": "Generative AI and large language models (LLMs) are now one of the modern solutions..."
         }
     ]
 }
 ```
 
-8. GET /api/v1/journals?date=<query_params_date>
-
+### 8. GET /api/v1/journals?date=<query_params_date>
+#### Request Header:
+```
 Authorization: <your_bearer_token>
-query_params_date: 2024-12-10
+```
+#### Query Params:
+`date` (string, e.g. 2024-12-10)
 
-Error Response Journal Not Found
+#### Error Response:
 ```json
 {
     "status": false,
     "message": "Journal created that day is not found"
 }
 ```
-
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
@@ -256,7 +245,7 @@ Success Response
     "journal": {
         "emailAuthor": "komangweda@gmail.com",
         "journalId": "9f7fbc3e-be0c-4e0e-bec4-fc21012e88ee",
-        "content": "Today felt like an emotional rollercoaster. I woke up feeling excited, looking forward to the plans I had made. The morning sunlight streaming through the window made everything feel possible. I brewed my favorite coffee, the aroma filling the room with warmth and comfort. For a moment, I felt truly happy.\n\nBut as the day progressed, things started to shift. An unexpected message from an old friend brought up memories I thought I had buried. It was bittersweet—part of me felt nostalgic, but another part was overwhelmed by regret and sadness. Why do good moments always seem to carry a shadow of the past?\n\nBy evening, frustration crept in. A task I had been working on all week hit another roadblock, and I could feel my patience slipping away. I wanted to scream but settled for a deep breath instead.\n\nAs I write this, I’m realizing how much I’ve felt in just one day. It’s exhausting but also oddly grounding. Maybe feeling all of this is just part of being alive.",
+        "content": "Today felt like an emotional rollercoaster...",
         "createdAt": "2024-12-11T07:57:25.393Z",
         "updatedAt": "2024-12-11T07:57:25.393Z",
         "isPredicted": true
@@ -264,7 +253,147 @@ Success Response
 }
 ```
 
+9. GET /api/v1/articles?index=<index>
 
+Authorization: <your_bearer_token>
+index: integer (e.g. 0, 1, 2, 10)
+
+Error redis unavailable
+```json
+{
+    "status": false,
+    "error": "connect ECONNREFUSED <redis_ip>"
+}
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "message": "success get article from DB",
+    "index": 0,
+    "totalArticle": 10,
+    "data": [
+        {
+            "bookmarkedCount": 8,
+            "id": "03e37921-8d94-4e6c-a584-b33ec4879453",
+            "title": "Generative AI Is Helping To Clear Up Brain Fog",
+            "description": "People talk about having brain fog. The meaning differs. One creative way to aid diagnosing and resolving brain fog is via generative AI. Here's the inside scoop.",
+            "url": "https://www.forbes.com/sites/lanceeliot/2024/11/24/generative-ai-is-helping-to-clear-up-brain-fog/",
+            "urlToImage": "https://imageio.forbes.com/specials-images/imageserve/6742bd86c3e3f33f6f0ec417/0x0.jpg?format=jpg&crop=2882,2160,x664,y0,safe&height=900&width=1600&fit=bounds",
+            "publishedAt": "2024-11-24T05:52:47.000Z",
+            "content": "Of the newest paths to try and cope with brain fog, generative AI and large language models (LLMs) ... [+] enter into the realm.\r\ngetty\r\nIn todays column, I explore the dreary and potentially imperil… "
+        },
+        {
+            "bookmarkedCount": 5,
+            "id": "02ab236c-358c-4d74-aba9-f17a439ad754",
+            "title": "Generative AI As Your Faithful Guide Toward Manifestation And Achieving Your Dreams And Life Goals",
+            "description": "A trending topic is manifestation. Here's what it is all about. Plus, the twist is that generative AI can aid in your manifestation pursuits. Pro tips are provided.",
+            "url": "https://www.forbes.com/sites/lanceeliot/2024/11/25/generative-ai-as-your-faithful-guide-toward-manifestation-and-achieving-your-dreams-and-life-goals/",
+            "urlToImage": "https://imageio.forbes.com/specials-images/imageserve/6744f29104d97693032485a5/0x0.jpg?format=jpg&crop=3013,2259,x365,y0,safe&height=900&width=1600&fit=bounds",
+            "publishedAt": "2024-11-26T02:36:56.000Z",
+            "content": "People are talking about manifestation, which turns out can be aided via the use of modern-day ... [+] generative AI and LLMs.\r\ngetty\r\nIn todays column, I explore the trending topic of manifestation,… "
+        },
+        .....,
+        .....,
+    ]
+}
+```
+
+10. POST /api/v1/articles/bookmark
+
+Authorization: <your_bearer_token>
+```json
+{
+    "articleId": "02ab236c-358c-4d74-aba9-f17a439ad754"
+}
+```
+
+Error Response Id Article Not Found
+```json
+{
+    "status": false,
+    "message": "Article with id: 03e37921-8d94-4e6c-a584-b33ec4879453a is not found"
+}
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "message": "Success bookmarked article with id: 03e37921-8d94-4e6c-a584-b33ec4879453"
+}
+```
+
+11. DELETE /api/v1/articles/bookmark
+
+Authorization: <your_bearer_token>
+```json
+{
+    "articleId": "02ab236c-358c-4d74-aba9-f17a439ad754"
+}
+```
+
+Error Response Bookmarked Article Not Found
+```json
+{
+    "status": false,
+    "error": "can't delete article with id 02ab236c-358c-4d74-aba9-f17a439ad754",
+    "message": "Article not found in bookmark with email: agung52@gmail.com"
+}
+```
+
+```json
+{
+    "status": true,
+    "message": "successfully delete article with id 03e37921-8d94-4e6c-a584-b33ec4879453 from bookmark"
+}
+```
+
+12. POST /api/v1/auth/refresh_token
+
+Authorization: <your_bearer_token>
+Cookie: refreshToken=<your_refresh_token>
+```json
+{
+    "expiredDate": "2024-11-29T02:52:13.318Z"
+}
+```
+
+Error refresh token is expired
+```json
+{
+    "error": true,
+    "message": "internal server error, token has expired"
+}
+```
+
+Success Response
+```json
+{
+    "error": false,
+    "message": "Successfully refreshed token",
+    "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFndW5nNTJAZ21haWwuY29tIiwiaWF0IjoxNzM0MDY3NjQ3LCJleHAiOjE3MzQxNTQwNDd9.dNE2J0KOAcK3cD33I-rnHqp64iuSD3SpCq9wAhX8gK0",
+    "expiredDate": "2024-12-20T05:27:27.908Z"
+}
+```
+
+13. /api/v1/journals/moods/weekly?date=<query_params_date>
+
+Authorization: <your_bearer_token>
+query_params_date: string (e.g. 2024-12-10)
+
+Success Response:
+{
+    "error": false,
+    "moods": {
+        "anger": 8,
+        "enthusiasm": 51,
+        "happiness": 33,
+        "sadness": 8,
+        "worry": 3
+    }
+}
 
 ## Dokumentasi Postman
 
