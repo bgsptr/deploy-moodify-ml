@@ -40,6 +40,36 @@ Success Response
     "success": true,
     "message": "success registered"
 }
+```
+
+2. POST /api/v1/auth/login
+
+```json
+{
+    "email": "agung@gmail.com",
+    "password": "Ayam1234!"
+}
+
+```
+Error Response
+```json
+{
+    "status": false,
+    "error": "No User found"
+}
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "message": "login successfully",
+    "accessToken": "<your_access_token>",
+    "refreshToken": "<your_refresh_token>",
+    "expRefreshToken": "2024-12-20T02:33:44.467Z"
+}
+```
+
 
 ## Dokumentasi Postman
 
