@@ -160,9 +160,9 @@ Authorization: <your_bearer_token>
 Authorization: <your_bearer_token>
 ```
 #### Request Body (form-data):
-```json
+```form_data
 {
-    "photo": <image_file>
+    "image": <image_file>
 }
 ```
 #### Error Responses:
