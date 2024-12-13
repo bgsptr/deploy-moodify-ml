@@ -114,7 +114,7 @@ Success Response
 ```
 
 
-4. POST /api/v1/profiles/me
+4. GET /api/v1/profiles/me
 
 ```json
 Authorization: <your_bearer_token>
@@ -134,6 +134,85 @@ Success Response
     }
 }
 ```
+
+5. PUT /api/v1/profiles/me
+
+```json
+Authorization: <your_bearer_token>
+{
+    "name": "bagus candra",
+    "gender": "male",
+    "country": "USA"
+}
+```
+
+Error 400 Response
+```json
+{
+    "status": false,
+    "error_msg": {
+        "name": [
+            "String must contain at least 4 character(s)"
+        ]
+    }
+}
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "message": "Success update your profile"
+}
+```
+
+6. PATCH /api/v1/profiles/photo
+
+```form-data
+Authorization: <your_bearer_token>
+{
+    "name": "bagus candra",
+    "gender": "male",
+    "country": "USA"
+}
+```
+
+Error Response Image Size Above 2 MB
+```json
+{
+    "status": false,
+    "message": "internal server error, Max size of image file must be below 2 MB"
+}
+```
+
+Error Response With Input No Value or Text Value
+```json
+{
+    "status": false,
+    "message": "Please provide your photo profile"
+}
+```
+
+Error Response With Wrong Format Image Input
+```json
+{
+    "status": false,
+    "message": "internal server error, Only PNG, JPEG, JPG, and WEBP are allowed"
+}
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "message": "success upload image",
+    "imageUrl": "https://storage.googleapis.com/bucket-profile-moodify/profileImage_agung52@gmail.com_13122024_025756.png"
+}
+```
+
+7. GET /api/v1/articles/bookmarks/me
+
+8. GET /api/v1/journals?date=2024-12-10
 
 
 
