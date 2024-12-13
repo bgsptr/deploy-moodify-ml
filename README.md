@@ -253,12 +253,12 @@ Authorization: <your_bearer_token>
 }
 ```
 
-9. GET /api/v1/articles?index=<index>
+### 9. GET /api/v1/articles?index=<index>
 
-Authorization: <your_bearer_token>
-index: integer (e.g. 0, 1, 2, 10)
+**Authorization:** `<your_bearer_token>`  
+**Query Parameter:** `index` (integer, e.g., 0, 1, 2, 10)
 
-Error redis unavailable
+#### Error Response: Redis Unavailable
 ```json
 {
     "status": false,
@@ -266,7 +266,7 @@ Error redis unavailable
 }
 ```
 
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
@@ -293,23 +293,24 @@ Success Response
             "urlToImage": "https://imageio.forbes.com/specials-images/imageserve/6744f29104d97693032485a5/0x0.jpg?format=jpg&crop=3013,2259,x365,y0,safe&height=900&width=1600&fit=bounds",
             "publishedAt": "2024-11-26T02:36:56.000Z",
             "content": "People are talking about manifestation, which turns out can be aided via the use of modern-day ... [+] generative AI and LLMs.\r\ngetty\r\nIn todays column, I explore the trending topic of manifestation,… "
-        },
-        .....,
-        .....,
+        }
     ]
 }
 ```
 
-10. POST /api/v1/articles/bookmark
+---
 
-Authorization: <your_bearer_token>
+### 10. POST /api/v1/articles/bookmark
+
+**Authorization:** `<your_bearer_token>`  
+**Request Body:**
 ```json
 {
     "articleId": "02ab236c-358c-4d74-aba9-f17a439ad754"
 }
 ```
 
-Error Response Id Article Not Found
+#### Error Response: Article ID Not Found
 ```json
 {
     "status": false,
@@ -317,7 +318,7 @@ Error Response Id Article Not Found
 }
 ```
 
-Success Response
+#### Success Response:
 ```json
 {
     "status": true,
@@ -325,16 +326,19 @@ Success Response
 }
 ```
 
-11. DELETE /api/v1/articles/bookmark
+---
 
-Authorization: <your_bearer_token>
+### 11. DELETE /api/v1/articles/bookmark
+
+**Authorization:** `<your_bearer_token>`  
+**Request Body:**
 ```json
 {
     "articleId": "02ab236c-358c-4d74-aba9-f17a439ad754"
 }
 ```
 
-Error Response Bookmarked Article Not Found
+#### Error Response: Bookmarked Article Not Found
 ```json
 {
     "status": false,
@@ -343,6 +347,7 @@ Error Response Bookmarked Article Not Found
 }
 ```
 
+#### Success Response:
 ```json
 {
     "status": true,
@@ -350,17 +355,21 @@ Error Response Bookmarked Article Not Found
 }
 ```
 
-12. POST /api/v1/auth/refresh_token
+---
 
-Authorization: <your_bearer_token>
-Cookie: refreshToken=<your_refresh_token>
+### 12. POST /api/v1/auth/refresh_token
+
+**Authorization:** `<your_bearer_token>`  
+**Cookie:** `refreshToken=<your_refresh_token>`  
+
+#### Success Response:
 ```json
 {
     "expiredDate": "2024-11-29T02:52:13.318Z"
 }
 ```
 
-Error refresh token is expired
+#### Error Response: Refresh Token Expired
 ```json
 {
     "error": true,
@@ -368,7 +377,7 @@ Error refresh token is expired
 }
 ```
 
-Success Response
+#### Success Response:
 ```json
 {
     "error": false,
@@ -378,12 +387,15 @@ Success Response
 }
 ```
 
-13. /api/v1/journals/moods/weekly?date=<query_params_date>
+---
 
-Authorization: <your_bearer_token>
-query_params_date: string (e.g. 2024-12-10)
+### 13. GET /api/v1/journals/moods/weekly?date=<query_params_date>
 
-Success Response:
+**Authorization:** `<your_bearer_token>`  
+**Query Parameter:** `date` (string, e.g., `2024-12-10`)
+
+#### Success Response:
+```json
 {
     "error": false,
     "moods": {
@@ -394,8 +406,9 @@ Success Response:
         "worry": 3
     }
 }
+```
 
-## Dokumentasi Postman
+### Dokumentasi Postman
 
 ![Articles](dokumentation%20postman/detail%20articles.png)
 ![Detail Articles](dokumentation%20postman/detail%20articles.png)
