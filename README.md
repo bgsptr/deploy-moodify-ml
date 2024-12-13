@@ -70,6 +70,38 @@ Success Response
 }
 ```
 
+Bearer token is expired response example
+```json
+{
+    "message": "Invalid or expired token"
+}
+```
+
+3. POST /api/v1/journals
+
+```json
+Authorization: <your_bearer_token>
+{
+    "journalContent": "<your_content>"
+}
+```
+
+Error 409 Response
+```json
+{
+    "status": false,
+    "message": "Journal already created today"
+}
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "message": "Successfully created journal"
+}
+```
+
 
 ## Dokumentasi Postman
 
