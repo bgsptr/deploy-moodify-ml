@@ -212,8 +212,57 @@ Success Response
 
 7. GET /api/v1/articles/bookmarks/me
 
-8. GET /api/v1/journals?date=2024-12-10
+Authorization: <your_bearer_token>
 
+Success Response
+```json
+{
+    "status": true,
+    "message": "successfully fetch bookmark article for user with email: komangweda@gmail.com",
+    "articles": [
+        {
+            "id": "03e37921-8d94-4e6c-a584-b33ec4879453",
+            "source": "Forbes",
+            "author": "Lance Eliot, Contributor, \n Lance Eliot, Contributor\n https://www.forbes.com/sites/lanceeliot/",
+            "title": "Generative AI Is Helping To Clear Up Brain Fog",
+            "description": "People talk about having brain fog. The meaning differs. One creative way to aid diagnosing and resolving brain fog is via generative AI. Here's the inside scoop.",
+            "url": "https://www.forbes.com/sites/lanceeliot/2024/11/24/generative-ai-is-helping-to-clear-up-brain-fog/",
+            "urlToImage": "https://imageio.forbes.com/specials-images/imageserve/6742bd86c3e3f33f6f0ec417/0x0.jpg?format=jpg&crop=2882,2160,x664,y0,safe&height=900&width=1600&fit=bounds",
+            "publishedAt": "2024-11-24T05:52:47.000Z",
+            "content": "Generative AI and large language models (LLMs) are now one of the modern solutions that are thought to help overcome brain fog, a condition that often makes a person find it difficult to think clearly and lose focus. This technology is able to convey information, provide structured reminders, and even assist in creative processes such as brainstorming ideas when the brain is not optimal. Additionally, AI-based tools can automate routine tasks, so users can focus more on work that requires strategic thinking. However, using AI to overcome brain fog also has risks, such as excessive reliance on technology that can reduce natural cognitive resilience, as well as privacy issues related to circulating data. With a balanced approach, a combination of AI assistance and lifestyle changes such as maintaining sleep patterns, nutrition, and mindfulness practices, can be a holistic way to manage brain fog effectively."
+        }
+    ]
+}
+```
+
+8. GET /api/v1/journals?date=<query_params_date>
+
+Authorization: <your_bearer_token>
+query_params_date: 2024-12-10
+
+Error Response Journal Not Found
+```json
+{
+    "status": false,
+    "message": "Journal created that day is not found"
+}
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "message": "Journal fetch successfully from database",
+    "journal": {
+        "emailAuthor": "komangweda@gmail.com",
+        "journalId": "9f7fbc3e-be0c-4e0e-bec4-fc21012e88ee",
+        "content": "Today felt like an emotional rollercoaster. I woke up feeling excited, looking forward to the plans I had made. The morning sunlight streaming through the window made everything feel possible. I brewed my favorite coffee, the aroma filling the room with warmth and comfort. For a moment, I felt truly happy.\n\nBut as the day progressed, things started to shift. An unexpected message from an old friend brought up memories I thought I had buried. It was bittersweet—part of me felt nostalgic, but another part was overwhelmed by regret and sadness. Why do good moments always seem to carry a shadow of the past?\n\nBy evening, frustration crept in. A task I had been working on all week hit another roadblock, and I could feel my patience slipping away. I wanted to scream but settled for a deep breath instead.\n\nAs I write this, I’m realizing how much I’ve felt in just one day. It’s exhausting but also oddly grounding. Maybe feeling all of this is just part of being alive.",
+        "createdAt": "2024-12-11T07:57:25.393Z",
+        "updatedAt": "2024-12-11T07:57:25.393Z",
+        "isPredicted": true
+    }
+}
+```
 
 
 
