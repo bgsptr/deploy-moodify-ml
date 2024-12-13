@@ -17,14 +17,20 @@
 
 ## Token Payload
 
-Token payload should contain the following data:
+1. POST /api/v1/auth/register
 
 ```json
-POST /api/v1/auth/register
 {
     "username": "agung",
     "email": "agung5@gmail.com",
     "password": "Ayam123!"
+}
+```
+Error Response
+```json
+{
+    "success": false,
+    "message": "Username or email already registered"
 }
 ```
 
