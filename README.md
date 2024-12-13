@@ -94,6 +94,17 @@ Error 409 Response
 }
 ```
 
+Error 422 Response
+```json
+{
+    "status": true,
+    "message": "validation error when create new journal",
+    "errors": [
+        "String must contain at least 200 character(s)"
+    ]
+}
+```
+
 Success Response
 ```json
 {
@@ -101,6 +112,30 @@ Success Response
     "message": "Successfully created journal"
 }
 ```
+
+
+4. POST /api/v1/profiles/me
+
+```json
+Authorization: <your_bearer_token>
+```
+
+Success Response
+```json
+{
+    "status": true,
+    "result": {
+        "email": "komangweda@gmail.com",
+        "username": "KomangWeda",
+        "name": "Mr. Wednesday ",
+        "gender": "male",
+        "country": "Not Representing",
+        "urlphoto": "https://storage.googleapis.com/bucket-profile-moodify/profileImage_komangweda@gmail.com_03122024_055647.jpeg"
+    }
+}
+```
+
+
 
 
 ## Dokumentasi Postman
